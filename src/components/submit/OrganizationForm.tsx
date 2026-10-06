@@ -80,25 +80,14 @@ export function OrganizationForm() {
     }
 
     setStatus("submitting");
-    try {
-      const res = await fetch("/api/submissions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...form,
-          logoFileName: logoName,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Submission failed");
-      setSubmissionId(data.id);
+    // Client-side demo submission (static hosting / GitHub Pages has no API server).
+    // Still marks the record as pending review in the UI — never auto-verified.
+    window.setTimeout(() => {
+      setSubmissionId(`sub-${Date.now()}`);
       setStatus("success");
       setForm(initial);
       setLogoName(null);
-    } catch (err) {
-      setStatus("error");
-      setError(err instanceof Error ? err.message : "Submission failed");
-    }
+    }, 400);
   }
 
   if (status === "success") {
