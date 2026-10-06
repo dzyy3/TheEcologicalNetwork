@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --soil: #172b29;
+  --sand: #f3f1e8;
+  --sand-bright: #f8f6ef;
+  --sand-dim: #e8e5db;
+  --canopy: #315b52;
+  --moss: #52756d;
+  --lichen: #c9c7bc;
+  --water: #667f86;
+  --signal: #b08a52;
+  --ink: #14201f;
+  --ink-muted: #4a5a57;
+  --ink-faint: #7a8682;
+  --line: rgba(23, 43, 41, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  background-color: var(--sand);
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(49, 91, 82, 0.22);
+}
+
+@layer components {
+  .panel {
+    @apply border border-ink/10 bg-sand-bright shadow-soft;
+    border-radius: 1px;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 border border-canopy bg-canopy px-5 py-2.5 text-[12px] font-medium uppercase text-sand-bright transition duration-200 hover:border-canopy-deep hover:bg-canopy-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moss;
+    border-radius: 1px;
+    letter-spacing: 0.12em;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-ink/20 bg-transparent px-5 py-2.5 text-[12px] font-medium uppercase text-ink transition duration-200 hover:border-canopy hover:text-canopy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moss;
+    border-radius: 1px;
+    letter-spacing: 0.12em;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-[13px] text-ink-muted transition duration-200 hover:text-canopy;
+    border-radius: 1px;
+  }
+
+  .btn-ghost:hover {
+    background-color: rgba(49, 91, 82, 0.06);
+  }
+
+  .field {
+    @apply w-full border border-ink/15 bg-sand-bright px-3 py-2 text-sm text-ink outline-none transition duration-200 placeholder:text-ink-faint focus:border-canopy/50 focus:ring-2 focus:ring-canopy/15;
+    border-radius: 1px;
+  }
+
+  .label-caps {
+    @apply font-mono text-[10px] font-medium uppercase text-ink-muted;
+    letter-spacing: 0.14em;
+  }
+
+  .chip {
+    @apply inline-flex items-center border border-ink/15 bg-transparent px-2 py-0.5 text-[11px] text-ink-muted transition duration-150;
+    border-radius: 1px;
+  }
+
+  .chip-active {
+    @apply border-canopy bg-canopy text-sand-bright;
+  }
+
+  .section-rule {
+    @apply border-t border-ink/10;
+  }
+
+  .index-mark {
+    @apply font-mono text-[10px] uppercase text-ink-faint;
+    letter-spacing: 0.14em;
+  }
+
+  .atlas-frame {
+    @apply relative border border-ink/15 bg-sand-bright shadow-map;
+    border-radius: 1px;
+  }
+
+  .atlas-frame::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(49, 91, 82, 0.08);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Subtle atlas field — cartographic depth, not decoration */
+.atlas-field {
+  background-color: var(--sand);
+  background-image:
+    linear-gradient(rgba(23, 43, 41, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 43, 41, 0.035) 1px, transparent 1px),
+    radial-gradient(ellipse at 12% 18%, rgba(49, 91, 82, 0.06), transparent 42%),
+    radial-gradient(ellipse at 88% 8%, rgba(102, 127, 134, 0.05), transparent 38%);
+  background-size: 72px 72px, 72px 72px, 100% 100%, 100% 100%;
+  background-position: -1px -1px, -1px -1px, center, center;
+}
+
+.atlas-field-dense {
+  background-image:
+    linear-gradient(rgba(23, 43, 41, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 43, 41, 0.028) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* MapLibre — atlas chrome */
+.maplibregl-ctrl-group {
+  border-radius: 1px !important;
+  overflow: hidden;
+  box-shadow: none !important;
+  border: 1px solid rgba(23, 43, 41, 0.18) !important;
+  background: #f8f6ef !important;
+}
+
+.maplibregl-ctrl-group button {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.maplibregl-ctrl-attrib {
+  font-size: 10px !important;
+  background: rgba(248, 246, 239, 0.92) !important;
+  border-radius: 1px !important;
+}
+
+.map-atlas-tone {
+  filter: sepia(0.18) saturate(0.72) contrast(0.96) brightness(1.03) hue-rotate(340deg);
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(49, 91, 82, 0.28);
+  border-radius: 2px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
